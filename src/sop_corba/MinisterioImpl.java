@@ -143,5 +143,38 @@ public class MinisterioImpl implements Ministerio{
         registrarUsuario(usu);
         return true;  
     }
+
+    @Override
+    public boolean editarCredenciales(String login, String password) {
+        eliminarAdmin();
+        validarAdministrador(login, password);
+        return true;
+    }
+    
+    public boolean eliminarAdmin() {
+        
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        int cont = 0;
+        boolean eliminacion;
+        String cadena;
+        String particion[] = new String[200];
+        String cod;
+         String ruta="./AdminMinisterio/adminMinisterio.txt";
+        try {
+            archivo = new File(ruta);
+            if (archivo.delete()) {
+                eliminacion = true;
+            } else {
+                eliminacion = false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return eliminacion;
+       
+    }
+    
     
 }

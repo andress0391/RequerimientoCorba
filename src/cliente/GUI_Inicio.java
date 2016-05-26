@@ -53,7 +53,7 @@ public class GUI_Inicio extends javax.swing.JFrame {
                 btnAdminBiblioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdminBiblio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 220, -1));
+        getContentPane().add(btnAdminBiblio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 250, -1));
 
         btnAdminMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/admin.png"))); // NOI18N
         btnAdminMin.setText("Administrador Ministerio");
@@ -62,7 +62,7 @@ public class GUI_Inicio extends javax.swing.JFrame {
                 btnAdminMinActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdminMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 220, -1));
+        getContentPane().add(btnAdminMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 250, -1));
 
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/user.png"))); // NOI18N
         btnUsuario.setText("Usuario");
@@ -71,7 +71,7 @@ public class GUI_Inicio extends javax.swing.JFrame {
                 btnUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 220, -1));
+        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 250, -1));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 280, -1));
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N

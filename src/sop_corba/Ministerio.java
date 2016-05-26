@@ -17,7 +17,8 @@ public interface Ministerio {
     
     public boolean validarAdministrador(String login, String password);
     public boolean registrarUsuario(usuarioInt u);
-      public boolean eliminarUsuario(String login);
+   public boolean eliminarUsuario(String login);
     public boolean modificarUsuario(String login,usuarioInt usu) ;
+    public boolean editarCredenciales(String login, String password);
     
 }

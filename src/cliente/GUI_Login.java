@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import sop_corba.MinisterioImpl;
 
 
@@ -26,7 +28,7 @@ public class GUI_Login extends javax.swing.JFrame {
     String separador = System.getProperty("file.separator");
     MinisterioImpl obj_r=new MinisterioImpl();
     //Conexion con=new Conexion();
-   //GUI_Admin objAdmin;
+   GUI_AdminMinisterio objAdminMin;
     //GUI_User objUser;
     
     //adminInt obj_r;
@@ -34,19 +36,19 @@ public class GUI_Login extends javax.swing.JFrame {
    public GUI_Login(GUI_Inicio objInicio,int sesion){
        initComponents();
        this.objInicio=objInicio;
+       jLabel2.setVisible(false);
         
        //obj_r=this.con.getObjetoRemoto();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-        this.setTitle("Login");
-             
+        this.setTitle("Login");             
         this.sesion=sesion;
+        if(sesion==1 || sesion==2)
+            jLabel2.setVisible(true);
     }
 
 
-    private GUI_Login(int sesion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
    
     @SuppressWarnings("unchecked")
@@ -61,7 +63,8 @@ public class GUI_Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -71,8 +74,8 @@ public class GUI_Login extends javax.swing.JFrame {
                 usuariotxtActionPerformed(evt);
             }
         });
-        getContentPane().add(usuariotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 111, -1));
-        getContentPane().add(passwordtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 161, 110, -1));
+        getContentPane().add(usuariotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, -1));
+        getContentPane().add(passwordtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 140, -1));
 
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +83,7 @@ public class GUI_Login extends javax.swing.JFrame {
                 btnOkActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +91,7 @@ public class GUI_Login extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
         jLabel1.setText("Bienvenido");
@@ -103,12 +106,22 @@ public class GUI_Login extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 90, 20));
 
         jLabel5.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
-        jLabel5.setText("Password");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 90, -1));
+        jLabel5.setText("Contraseña");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 90, -1));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondo pasword.jpg"))); // NOI18N
-        jLabel7.setText("'");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 300));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 3, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("¿Olvidó el nombre de usuario y/o la contraseña?");
+        jLabel2.setToolTipText("Click aquí para cambiar el nombre de usuario y/o la contraseña");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                olvideContra(evt);
+            }
+        });
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 280, 30));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondo pasword.jpg"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,9 +151,8 @@ public class GUI_Login extends javax.swing.JFrame {
                     
                     JOptionPane.showConfirmDialog(null, "BIENVEDIDO AL SISTEMA", "Estado", JOptionPane.DEFAULT_OPTION, 0, new ImageIcon(directorio + separador + "src" + separador + "iconos" + separador + "bienvenidonew.jpg"));
                     try {
-                        //objAdmin = new GUI_Admin(this);
-
-                       // objAdmin.setVisible(true);
+                        objAdminMin = new GUI_AdminMinisterio(this);
+                       objAdminMin.setVisible(true);
                         this.setVisible(false);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -193,6 +205,34 @@ public class GUI_Login extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void olvideContra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_olvideContra
+        JTextField nombreUsuario=new JTextField();
+        JPasswordField contraNueva=new JPasswordField();
+        JPasswordField contraRepeat=new JPasswordField();
+        int contDatos=0;
+        
+        Object [] datos={"Ingrese el nuevo nombre de usuario:\t",nombreUsuario,"Ingrese la nueva contraseña:\t",contraNueva,"Vuelva a ingresar la contraseña:\t",contraRepeat};
+        int accion=JOptionPane.showConfirmDialog(this, datos,"Cambiar la contraseña",JOptionPane.DEFAULT_OPTION);
+        if(accion==JOptionPane.OK_OPTION){
+            if(nombreUsuario.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Debe ingresar un nombre de usuario","Atención",JOptionPane.DEFAULT_OPTION);
+                
+            }else
+                contDatos++;
+            if(!(contraNueva.getText().equals(contraRepeat.getText())))
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden","Atención",JOptionPane.WARNING_MESSAGE);
+            else
+                contDatos++;
+            if(contDatos==2){
+                obj_r.editarCredenciales(nombreUsuario.getText(), contraNueva.getText());
+                JOptionPane.showConfirmDialog(this, "Se ha cambiado la contraseña exitosamente", "Información", JOptionPane.DEFAULT_OPTION, 0, new ImageIcon(directorio + separador + "src" + separador + "iconos" + separador + "muybien.jpg"));
+            }
+        }
+        else
+            return;
+        
+    }//GEN-LAST:event_olvideContra
+
     /**
      * @param args the command line arguments
      */
@@ -238,10 +278,11 @@ public class GUI_Login extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField passwordtxt;
     private javax.swing.JTextField usuariotxt;
     // End of variables declaration//GEN-END:variables

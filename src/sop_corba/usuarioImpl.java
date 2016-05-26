@@ -28,12 +28,11 @@ public class usuarioImpl implements usuarioInt{
         super();
     }
     
-    public usuarioImpl(String apellidos, String nombres, int identificacion, int edad, String login, String clave) throws RemoteException {
+    public usuarioImpl( String nombres,String apellidos, String login, String clave) throws RemoteException {
        
-        this.apellidos = apellidos;
+        
         this.nombres = nombres;
-        this.identificacion = identificacion;
-        this.edad = edad;
+        this.apellidos = apellidos;
         this.login = login;
         this.clave = clave;
     }
